@@ -12,15 +12,23 @@ export default class AddItem extends Component {
   addItem = event => {
     event.preventDefault();
     this.props.addItem(this.state);
+    event.currentTarget.reset();
   };
   handleChange = event => {
     const target = event.target;
-    const value = target.type === "checkbox" ? target.checked : target.value;
     const name = target.name;
-    this.setState({
-      [name]: value
-    } //, () => console.log(this.state)
-  )};
+    const value =
+      target.type === "checkbox"
+        ? target.checked
+        : name === "price"
+          ? parseFloat(target.value)
+          : target.value;
+    this.setState(
+      {
+        [name]: value
+      } //, () => console.log(this.state)
+    );
+  };
   render() {
     return (
       <form className="add-item" onSubmit={this.addItem}>
@@ -30,6 +38,7 @@ export default class AddItem extends Component {
           type="text"
           placeholder="Name"
           onChange={this.handleChange}
+          required
         />
         <input
           name="price"
@@ -45,7 +54,6 @@ export default class AddItem extends Component {
         />
 
         <select
-          multiple={true}
           value={this.state.value}
           onChange={this.handleChange}
           name="option"
@@ -60,12 +68,8 @@ export default class AddItem extends Component {
           placeholder="Description"
           onChange={this.handleChange}
         />
-        <input
-          name="image"
-          type="file"
-          onChange={this.handleChange}
-        />
-        <button type="submit">+Add</button>
+        <input name="image" type="file" onChange={this.handleChange} />
+        <button type="submit">+ Add</button>
       </form>
     );
   }

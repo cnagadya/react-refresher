@@ -7,6 +7,7 @@ export default class Inventory extends Component {
       <div className="inventory">
         <h2>Inventory</h2>
         <AddItem addItem={this.props.addItem} />
+        {/* <button onClick={this.props.viewItems}>View Items</button> */}
       </div>
     );
   }

@@ -9,6 +9,9 @@
 # production
 /build
 
+#priv files
+/src/components/fauna
+
 # misc
 .DS_Store
 .env.local
